@@ -81,7 +81,7 @@ class BaseTest(object):
 
         Returns the return value of the function we are trying.
         """
-        for i in xrange(attempts):
+        for i in range(attempts):
             try:
                 result = function()
                 # It will only return if the assertion does not throw an error
