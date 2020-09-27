@@ -6,6 +6,8 @@ import argparse
 import ast
 import time
 
+import geckodriver_autoinstaller
+geckodriver_autoinstaller.install()
 # Set up the command line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--desktop", help="(boolean) Make the tests only run tests on desktop computers. BROWSERSTACK.",
@@ -85,12 +87,12 @@ if(args.browserstack):
         selenium_username = os.environ['SELENIUM_AUTOMATE_USERNAME']
         selenium_value = os.environ['SELENIUM_AUTOMATE_VALUE']
     except KeyError:
-        print "You need to set the environment variables for your username and value. See the README.md for details"
+        print ("You need to set the environment variables for your username and value. See the README.md for details")
         exit()
 
 
 if(BASE_URL == ""):
-    print "You need to set your DEFAULT_BASE_URL in config.py."
+    print ("You need to set your DEFAULT_BASE_URL in config.py.")
     exit()
 
 # If browserstack is set to be used then do set up the desired capabilities array, etc.
@@ -169,17 +171,17 @@ for desired_cap in desired_cap_list:
         # Output a line to show what enivornment is now being tested
         if("browser" in desired_cap):
             # For desktop on browserstack
-            print "\nStarting Tests on %s %s on %s %s with a screen resolution of %s " % (desired_cap["browser"],
-                desired_cap["browser_version"], desired_cap["os"], desired_cap["os_version"], desired_cap["resolution"])
+            print ("\nStarting Tests on %s %s on %s %s with a screen resolution of %s " % (desired_cap["browser"],
+                desired_cap["browser_version"], desired_cap["os"], desired_cap["os_version"], desired_cap["resolution"]))
         else:
             # For mobile on browserstack
-            print "\nStarting Tests on a %s" % (desired_cap["device"])
+            print ("\nStarting Tests on a %s" % (desired_cap["device"]))
     # Otherwise, just simply output this message
     else:
         # For desktop on localmachine using firefox
-        print "\nStarting Tests on %s on your local machine" % (desired_cap["browser"])
+        print ("\nStarting Tests on %s on your local machine" % (desired_cap["browser"]))
 
-    print "--------------------------------------------------\n"
+    print ("--------------------------------------------------\n")
 
     # If the browserstack argument was passed, then dynamically set up the remote driver.
     if(args.browserstack):
@@ -229,17 +231,16 @@ for desired_cap in desired_cap_list:
         # Output the amount of time it took this test to run on the current platform
         this_test_seconds_taken = time.time() - this_test_start_time
         if(this_test_seconds_taken > 60):
-            print "Time taken: " + str(this_test_seconds_taken / 60) + " minutes"
+            print ("Time taken: " + str(this_test_seconds_taken / 60) + " minutes")
         else:
-            print "Time taken: " + str(this_test_seconds_taken) + " seconds"
+            print ("Time taken: " + str(this_test_seconds_taken) + " seconds")
 
     # Output the amount of time it took all tests to run on the current platform
-    print "--------------------------------------------------\n"
-    all_tests_seconds_taken = (time.time() - all_tests_start_time)
+    print(f"--------------------------------------------------\n all_tests_seconds_taken = ({time.time()} - all_tests_start_time)")
     if(all_tests_seconds_taken > 60):
-        print "Time taken for all tests: " + str(all_tests_seconds_taken / 60) + " minutes"
+        print ("Time taken for all tests: " + str(all_tests_seconds_taken / 60) + " minutes")
     else:
-        print "Time taken for all tests: " + str(all_tests_seconds_taken) + " seconds"
+        print ("Time taken for all tests: " + str(all_tests_seconds_taken) + " seconds")
 
     # Clean Up
     driver.quit()

@@ -19,6 +19,6 @@ class Test(BaseTest):
         elem = self.keep_trying(lambda: self.driver.find_element_by_name("q"))
         elem.send_keys("BrowerStack")
         elem.submit()
-        print self.driver.title
+        print (self.driver.title)
         # No need to quit driver at the end of the test. The run.py file will
         # handle that
