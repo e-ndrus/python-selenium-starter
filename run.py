@@ -236,7 +236,8 @@ for desired_cap in desired_cap_list:
             print ("Time taken: " + str(this_test_seconds_taken) + " seconds")
 
     # Output the amount of time it took all tests to run on the current platform
-    print(f"--------------------------------------------------\n all_tests_seconds_taken = ({time.time()} - all_tests_start_time)")
+    print(f"--------------------------------------------------\n") 
+    all_tests_seconds_taken = (time.time() - all_tests_start_time)
     if(all_tests_seconds_taken > 60):
         print ("Time taken for all tests: " + str(all_tests_seconds_taken / 60) + " minutes")
     else:
